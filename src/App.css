@@ -5,32 +5,22 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
   background-color: #f5f5f5;
   color: #1a1a1a;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 #root {
-  max-width: 500px;
-  margin: 0 auto;
-  background: #f5f5f5;
+  width: 100%;
   min-height: 100vh;
-  position: relative;
-}
-
-/* Prevent zoom on input focus (iOS) */
-input, textarea, select {
-  font-size: 16px;
-}
-
-/* Disable pinch zoom */
-html, body {
-  touch-action: pan-x pan-y;
+  background: #f5f5f5;
+  overflow-x: hidden;
 }
 
 /* ============================================ */
-/* LOGIN SCREEN - LIGHT THEME
+/* LOGIN SCREEN - FULL WIDTH RESPONSIVE
 /* ============================================ */
 
 .login-container {
@@ -39,7 +29,8 @@ html, body {
   justify-content: center;
   align-items: center;
   background: #f5f5f5;
-  padding: 20px;
+  padding: 16px;
+  width: 100%;
 }
 
 .login-card {
@@ -49,8 +40,289 @@ html, body {
   width: 100%;
   max-width: 400px;
   border: 1px solid #e0e0e0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
+
+/* ============================================ */
+/* TOP BAR - FULL WIDTH
+/* ============================================ */
+
+.top-bar {
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+}
+
+/* ============================================ */
+/* ARTICLE CARD - RESPONSIVE FLEXIBLE
+/* ============================================ */
+
+.article-card {
+  background: #ffffff;
+  margin: 8px 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  width: auto;
+  max-width: 100%;
+}
+
+.article-image {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.article-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.article-headline {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+  text-align: left;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.read-more {
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 8px;
+  align-self: flex-start;
+}
+
+.article-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+/* ============================================ */
+/* AD CARD - FULL WIDTH
+/* ============================================ */
+
+.ad-card {
+  margin: 8px 12px;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  width: auto;
+  max-width: 100%;
+}
+
+.ad-image-banner {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================ */
+/* BOTTOM NAVIGATION - FIXED AT BOTTOM
+/* ============================================ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 16px 20px;
+  border-top: 1px solid #e0e0e0;
+  width: 100%;
+  z-index: 100;
+}
+
+/* ============================================ */
+/* ARTICLE DETAIL - FULL WIDTH
+/* ============================================ */
+
+.detail-container {
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 80px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.detail-cover {
+  width: 100%;
+  height: auto;
+  min-height: 200px;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.detail-content-wrapper {
+  padding: 16px;
+  background: #ffffff;
+  margin: 12px;
+  border-radius: 16px;
+}
+
+.detail-title {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  text-align: left;
+  color: #1a1a1a;
+  word-wrap: break-word;
+}
+
+.detail-date {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.detail-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20px;
+  word-wrap: break-word;
+}
+
+/* Square Ad in Article Detail */
+.detail-ad-square {
+  margin: 20px 0;
+  text-align: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 8px;
+  width: 100%;
+}
+
+.ad-image-square {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+/* ============================================ */
+/* VIDEO WRAPPER - RESPONSIVE
+/* ============================================ */
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 0 12px;
+  width: auto;
+}
+
+/* ============================================ */
+/* SIDEBAR - FIXED WIDTH
+/* ============================================ */
+
+.sidebar-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: #ffffff;
+  z-index: 999;
+  padding: 20px;
+  overflow-y: auto;
+  border-right: 1px solid #e0e0e0;
+}
+
+/* ============================================ */
+/* UTILITIES
+/* ============================================ */
+
+/* Remove horizontal scroll from all containers */
+div, section, main, article {
+  overflow-x: hidden;
+}
+
+/* Make sure images don't overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive text */
+@media (max-width: 480px) {
+  .article-headline {
+    font-size: 13px;
+  }
+  
+  .article-image {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+  }
+  
+  .detail-title {
+    font-size: 20px;
+  }
+  
+  .detail-text {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .article-image {
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+  }
+  
+  .article-headline {
+    font-size: 16px;
+  }
+  
+  .detail-title {
+    font-size: 28px;
+  }
+}
+
+/* ============================================ */
+/* LOADER, SIDEBAR, OTHER STYLES
+/* ============================================ */
 
 .login-icon {
   width: 56px;
@@ -122,26 +394,6 @@ html, body {
   margin-top: 8px;
 }
 
-/* ============================================ */
-/* TOP BAR - LIGHT THEME
-/* ============================================ */
-
-.top-bar {
-  background: #ffffff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 16px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.app-title {
-  cursor: pointer;
-}
-
 .logo-text {
   font-size: 18px;
   font-weight: 800;
@@ -160,124 +412,6 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* ============================================ */
-/* ARTICLE CARD - LIGHT THEME
-/* ============================================ */
-
-.article-card {
-  background: #ffffff;
-  margin: 8px 12px;
-  border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
-  padding: 12px;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-}
-
-.article-image {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 10px;
-  flex-shrink: 0;
-}
-
-.article-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.article-headline {
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
-  color: #1a1a1a;
-  margin-bottom: 6px;
-  text-align: left;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.read-more {
-  color: #ef4444;
-  font-size: 12px;
-  font-weight: 500;
-  display: inline-block;
-  margin-bottom: 8px;
-}
-
-.article-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: flex-end;
-}
-
-.action-btn {
-  background: none;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-  color: #888;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 8px;
-}
-
-.action-btn:hover {
-  background: #f0f0f0;
-}
-
-.action-btn.saved {
-  color: #eab308;
-}
-
-/* ============================================ */
-/* AD CARD - LIGHT THEME
-/* ============================================ */
-
-.ad-card {
-  margin: 8px 12px;
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #e0e0e0;
-}
-
-.ad-image-banner {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* ============================================ */
-/* BOTTOM NAVIGATION - LIGHT THEME
-/* ============================================ */
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #ffffff;
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 16px 20px;
-  border-top: 1px solid #e0e0e0;
-  max-width: 500px;
-  margin: 0 auto;
-  z-index: 100;
 }
 
 .nav-item {
@@ -311,16 +445,6 @@ html, body {
   color: #ef4444;
 }
 
-/* ============================================ */
-/* ARTICLE DETAIL - LIGHT THEME
-/* ============================================ */
-
-.detail-container {
-  background: #f5f5f5;
-  min-height: 100vh;
-  padding-bottom: 80px;
-}
-
 .detail-back-btn {
   background: none;
   border: none;
@@ -334,62 +458,6 @@ html, body {
   cursor: pointer;
 }
 
-.detail-cover {
-  width: 100%;
-  height: auto;
-  min-height: 200px;
-  max-height: 300px;
-  object-fit: cover;
-}
-
-.detail-content-wrapper {
-  padding: 16px;
-  background: #ffffff;
-  margin: 12px;
-  border-radius: 16px;
-}
-
-.detail-date {
-  font-size: 12px;
-  color: #888;
-  margin-bottom: 16px;
-  display: block;
-}
-
-.detail-title {
-  font-size: 22px;
-  line-height: 1.3;
-  margin-bottom: 12px;
-  text-align: left;
-  color: #1a1a1a;
-}
-
-.detail-text {
-  font-size: 15px;
-  line-height: 1.6;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-/* Square Ad in Article Detail */
-.detail-ad-square {
-  margin: 20px 0;
-  text-align: center;
-  background: #f5f5f5;
-  border-radius: 12px;
-  padding: 8px;
-}
-
-.ad-image-square {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
-
-/* Detail Actions */
 .detail-end-actions {
   display: flex;
   gap: 12px;
@@ -419,49 +487,14 @@ html, body {
   color: #ffffff;
 }
 
-/* Video Wrapper */
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  margin: 0 12px;
-}
-
-.video-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* ============================================ */
-/* SIDEBAR - LIGHT THEME
-/* ============================================ */
-
 .sidebar-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   z-index: 998;
-}
-
-.sidebar-panel {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 280px;
-  background: #ffffff;
-  z-index: 999;
-  padding: 20px;
-  overflow-y: auto;
-  border-right: 1px solid #e0e0e0;
 }
 
 .sidebar-header {
@@ -550,10 +583,6 @@ html, body {
   margin-top: 36px;
 }
 
-/* ============================================ */
-/* TAB CONTENT
-/* ============================================ */
-
 .tab-header {
   padding: 16px;
 }
@@ -581,15 +610,12 @@ html, body {
   margin-bottom: 14px;
 }
 
-/* ============================================ */
-/* LOADER
-/* ============================================ */
-
 .loader-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 60vh;
+  width: 100%;
 }
 
 .loader-spinner {
@@ -602,12 +628,9 @@ html, body {
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
-/* Scrollbar */
 ::-webkit-scrollbar {
   width: 3px;
 }
