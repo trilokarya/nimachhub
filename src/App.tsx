@@ -1,72 +1,133 @@
-import React, { useState } from 'react';
-import { supabase } from './supabaseClient';
-import Home from './components/Home';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import { supabase } from './supabaseClient'
+import Home from './components/Home'
+import './App.css'
 
 function App() {
-  const [user, setUser] = useState<any>(null);
-  const [name, setName] = useState('');
-  const [loginInput, setLoginInput] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [user, setUser] = useState<any>(null)
+  const [name, setName] = useState('')
+  const [loginInput, setLoginInput] = useState('')
+  const [loading, setLoading] = useState(true)
+  const [message, setMessage] = useState('')
+
+  // Check for existing user session when app starts
+  useEffect(() => {
+    const savedUser = localStorage.getItem('nimach_user')
+    if (savedUser) {
+      try {
+        const parsedUser = JSON.parse(savedUser)
+        // Verify user still exists in database (optional but good)
+        verifyUserInDB(parsedUser)
+      } catch (e) {
+        console.error('Failed to parse saved user')
+        setLoading(false)
+      }
+    } else {
+      setLoading(false)
+    }
+  }, [])
+
+  const verifyUserInDB = async (savedUser: any) => {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', savedUser.id)
+        .single()
+      
+      if (data) {
+        setUser(data)
+        // Update stored user with latest data
+        localStorage.setItem('nimach_user', JSON.stringify(data))
+      } else {
+        // User not found in DB, clear storage
+        localStorage.removeItem('nimach_user')
+      }
+    } catch (err) {
+      console.error('Verification failed')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage('');
+    e.preventDefault()
+    setLoading(true)
+    setMessage('')
 
     if (!loginInput.trim()) {
-      setMessage('Please enter Email or Mobile Number');
-      setLoading(false);
-      return;
+      setMessage('Please enter Email or Mobile Number')
+      setLoading(false)
+      return
     }
 
-    const isEmail = loginInput.includes('@');
-
-    let query = supabase.from('users').select('*');
-
+    const isEmail = loginInput.includes('@')
+    
+    let query = supabase.from('users').select('*')
+    
     if (isEmail) {
-      query = query.eq('email', loginInput.trim());
+      query = query.eq('email', loginInput.trim())
     } else {
-      query = query.eq('mobile', loginInput.trim());
+      query = query.eq('mobile', loginInput.trim())
     }
 
-    const { data: existingUser } = await query.maybeSingle();
+    const { data: existingUser, error: fetchError } = await query.maybeSingle()
 
     if (existingUser) {
-      setUser(existingUser);
-      setMessage(`Welcome back ${existingUser.name}!`);
+      // User exists - login and save to localStorage
+      setUser(existingUser)
+      localStorage.setItem('nimach_user', JSON.stringify(existingUser))
+      setMessage(`Welcome back ${existingUser.name}!`)
     } else {
-      const newUserData: any = {
-        name: name.trim(),
-        role: 'user',
-      };
-
-      if (isEmail) {
-        newUserData.email = loginInput.trim();
-      } else {
-        newUserData.mobile = loginInput.trim();
+      // New user - register
+      const newUserData: any = { 
+        name: name.trim(), 
+        role: 'user' 
       }
-
+      
+      if (isEmail) {
+        newUserData.email = loginInput.trim()
+      } else {
+        newUserData.mobile = loginInput.trim()
+      }
+      
       const { data: newUser, error: insertError } = await supabase
         .from('users')
         .insert([newUserData])
         .select()
-        .single();
+        .single()
 
       if (newUser) {
-        setUser(newUser);
-        setMessage(`Welcome ${name.trim()}! Account created.`);
+        setUser(newUser)
+        localStorage.setItem('nimach_user', JSON.stringify(newUser))
+        setMessage(`Welcome ${name.trim()}! Account created.`)
       } else {
-        setMessage('Error: ' + insertError?.message);
+        setMessage('Error: ' + insertError?.message)
       }
     }
 
-    setLoading(false);
-  };
+    setLoading(false)
+  }
+
+  const handleLogout = () => {
+    setUser(null)
+    // Clear all app data from localStorage
+    if (user?.id) {
+      localStorage.removeItem(`saved_articles_${user.id}`)
+    }
+    localStorage.removeItem('nimach_user')
+  }
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <div className="loader-spinner"></div>
+      </div>
+    )
+  }
 
   if (user) {
-    return <Home user={user} onLogout={() => setUser(null)} />;
+    return <Home user={user} onLogout={handleLogout} />
   }
 
   return (
@@ -77,7 +138,7 @@ function App() {
         </div>
         <h1 className="login-title">NIMACH HUB</h1>
         <p className="login-subtitle">Your daily news source</p>
-
+        
         <form onSubmit={handleSubmit}>
           <div className="login-input-group">
             <label>Full Name</label>
@@ -89,7 +150,7 @@ function App() {
               required
             />
           </div>
-
+          
           <div className="login-input-group">
             <label>Email or Mobile Number</label>
             <input
@@ -100,27 +161,16 @@ function App() {
               required
             />
           </div>
-
+          
           <button type="submit" className="login-btn" disabled={loading}>
             {loading ? 'Processing...' : 'Continue →'}
           </button>
         </form>
-
-        {message && (
-          <p
-            style={{
-              marginTop: '16px',
-              textAlign: 'center',
-              fontSize: '14px',
-              color: message.includes('Welcome') ? '#22c55e' : '#ef4444',
-            }}
-          >
-            {message}
-          </p>
-        )}
+        
+        {message && <p style={{ marginTop: '16px', textAlign: 'center', fontSize: '14px', color: message.includes('Welcome') ? '#22c55e' : '#ef4444' }}>{message}</p>}
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
