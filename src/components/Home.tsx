@@ -168,7 +168,7 @@ function Home({ user, onLogout }: HomeProps) {
   let adCounter = 0;
 
   return (
-    <div style={{ paddingBottom: '70px', maxWidth: '500px', margin: '0 auto' }}>
+<div style={{ paddingBottom: '70px', width: '100%' }}>
       <Sidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
