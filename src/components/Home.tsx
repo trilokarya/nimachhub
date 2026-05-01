@@ -120,14 +120,6 @@ function Home({ user, onLogout }: HomeProps) {
     return articles.filter((article) => savedArticles.includes(article.id));
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-IN', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    });
-  };
 
   const getAdFrequency = () => {
     const articleCount = articles.length;
