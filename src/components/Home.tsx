@@ -10,12 +10,14 @@ interface Article {
   youtube_link: string;
   detail: string;
   created_at: string;
+  
 }
 
 interface Ad {
   id: string;
   business_name: string;
   image_url: string;
+   created_at?: string
 }
 
 interface HomeProps {
