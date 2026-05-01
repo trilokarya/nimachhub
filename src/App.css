@@ -19,6 +19,16 @@ body {
   position: relative;
 }
 
+/* Prevent zoom on input focus (iOS) */
+input, textarea, select {
+  font-size: 16px;
+}
+
+/* Disable pinch zoom */
+html, body {
+  touch-action: pan-x pan-y;
+}
+
 /* ============================================ */
 /* LOGIN SCREEN - LIGHT THEME
 /* ============================================ */
