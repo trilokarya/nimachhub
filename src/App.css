@@ -67,7 +67,6 @@ body {
 .article-card {
   background: #ffffff;
   margin: 8px 12px;
-  border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
   display: flex;
@@ -134,7 +133,6 @@ body {
 .ad-card {
   margin: 8px 12px;
   background: #ffffff;
-  border-radius: 12px;
   overflow: hidden;
   border: 1px solid #e0e0e0;
   width: auto;
